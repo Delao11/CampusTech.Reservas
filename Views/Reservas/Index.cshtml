@@ -1,0 +1,78 @@
+﻿@model IEnumerable<CampusTech.Reservas.Models.Reserva>
+
+@{
+    ViewData["Title"] = "Listado de Reservas";
+}
+
+<div class="container mt-4">
+
+    <!-- MENSAJE DE ÉXITO -->
+    @if (TempData["Success"] != null)
+    {
+        <div class="alert alert-success alert-dismissible fade show shadow" role="alert">
+            <strong>✔ Éxito:</strong> @TempData["Success"]
+            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+        </div>
+    }
+
+    <div class="d-flex justify-content-between align-items-center mb-3">
+        <h2 class="fw-bold" style="color:#1b5e20;">📋 Listado de Reservas</h2>
+        <a asp-action="Create" class="btn btn-success fw-bold" style="border-radius: 12px;">
+            ➕ Crear Reserva
+        </a>
+    </div>
+
+    <div class="table-responsive shadow-lg">
+        <table class="table table-hover text-center align-middle" style="background: #ffffff; border-radius: 16px; overflow: hidden;">
+            <thead class="text-white" style="background: #2e7d32;">
+                <tr>
+                    <th>Profesor</th>
+                    <th>Correo</th>
+                    <th>Lab</th>
+                    <th>Fecha</th>
+                    <th>Inicio</th>
+                    <th>Fin</th>
+                    <th>Código</th>
+                    <th>Motivo</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var r in Model)
+                {
+                    <tr style="background: #f1f8f1;">
+                        <td>@r.NombreProfesor</td>
+                        <td>@r.CorreoInstitucional</td>
+
+                        <!-- Badge Verde -->
+                        <td>
+                            <span class="badge bg-success p-2">@r.Laboratorio</span>
+                        </td>
+
+                        <td>@r.FechaReserva.ToString("yyyy-MM-dd")</td>
+                        <td><span class="badge bg-primary">@r.HoraInicio</span></td>
+                        <td><span class="badge bg-primary">@r.HoraFin</span></td>
+
+                        <td><span class="badge bg-secondary">@r.CodigoReserva</span></td>
+
+                        <td>@r.Motivo</td>
+
+                        <!-- ACCIONES -->
+                        <td>
+                            <a asp-action="Edit" asp-route-id="@r.Id" class="btn btn-sm btn-warning text-white">
+                                ✏️ Editar
+                            </a>
+
+                            <a asp-action="Delete" asp-route-id="@r.Id"
+                               onclick="return confirm('¿Está seguro de eliminar esta reserva?');"
+                               class="btn btn-sm btn-danger">
+                                🗑️ Eliminar
+                            </a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+
+</div>
