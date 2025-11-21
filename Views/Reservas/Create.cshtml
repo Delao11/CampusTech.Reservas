@@ -1,0 +1,93 @@
+﻿@model CampusTech.Reservas.Models.Reserva
+
+@{
+    ViewData["Title"] = "Registrar Reserva";
+}
+
+<div class="container mt-4">
+
+    <div class="card shadow-lg border-0" style="border-radius: 18px;">
+        <div class="card-header text-white" style="background-color: #2e7d32; border-radius: 18px 18px 0 0;">
+            <h3 class="text-center m-2">📘 Registrar Nueva Reserva</h3>
+        </div>
+
+        <div class="card-body" style="background: #f4fdf6;">
+            <form asp-action="Create">
+
+                <!-- Nombre del profesor -->
+                <div class="mb-3">
+                    <label asp-for="NombreProfesor" class="form-label fw-bold"></label>
+                    <input asp-for="NombreProfesor" class="form-control" />
+                    <span asp-validation-for="NombreProfesor" class="text-danger"></span>
+                </div>
+
+                <!-- Correo institucional -->
+                <div class="mb-3">
+                    <label asp-for="CorreoInstitucional" class="form-label fw-bold"></label>
+                    <input asp-for="CorreoInstitucional" class="form-control" />
+                    <span asp-validation-for="CorreoInstitucional" class="text-danger"></span>
+                </div>
+
+                <!-- Laboratorio -->
+                <div class="mb-3">
+                    <label asp-for="Laboratorio" class="form-label fw-bold"></label>
+                    <select asp-for="Laboratorio" asp-items="Html.GetEnumSelectList<Laboratorio>()"
+                            class="form-select"></select>
+                    <span asp-validation-for="Laboratorio" class="text-danger"></span>
+                </div>
+
+                <!-- Fecha -->
+                <div class="row">
+                    <div class="col-md-4 mb-3">
+                        <label asp-for="FechaReserva" class="form-label fw-bold"></label>
+                        <input asp-for="FechaReserva" class="form-control" />
+                        <span asp-validation-for="FechaReserva" class="text-danger"></span>
+                    </div>
+
+                    <!-- Hora inicio -->
+                    <div class="col-md-4 mb-3">
+                        <label asp-for="HoraInicio" class="form-label fw-bold"></label>
+                        <input asp-for="HoraInicio" class="form-control" />
+                        <span asp-validation-for="HoraInicio" class="text-danger"></span>
+                    </div>
+
+                    <!-- Hora fin -->
+                    <div class="col-md-4 mb-3">
+                        <label asp-for="HoraFin" class="form-label fw-bold"></label>
+                        <input asp-for="HoraFin" class="form-control" />
+                        <span asp-validation-for="HoraFin" class="text-danger"></span>
+                    </div>
+                </div>
+
+                <!-- Motivo -->
+                <div class="mb-3">
+                    <label asp-for="Motivo" class="form-label fw-bold"></label>
+                    <textarea asp-for="Motivo" class="form-control" rows="3"></textarea>
+                    <span asp-validation-for="Motivo" class="text-danger"></span>
+                </div>
+
+                <!-- Código reserva -->
+                <div class="mb-4">
+                    <label asp-for="CodigoReserva" class="form-label fw-bold"></label>
+                    <input asp-for="CodigoReserva" class="form-control" />
+                    <span asp-validation-for="CodigoReserva" class="text-danger"></span>
+                </div>
+
+                <div class="text-center">
+                    <button type="submit" class="btn btn-success px-4 py-2 fw-bold" style="border-radius: 10px;">
+                        ✔ Guardar Reserva
+                    </button>
+                    <a asp-action="Index" class="btn btn-secondary px-4 py-2 fw-bold" style="border-radius: 10px;">
+                        ↩ Volver
+                    </a>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}
